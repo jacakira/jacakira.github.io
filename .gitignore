@@ -1,0 +1,45 @@
+# Hugo build output
+/public/
+/resources/_gen/
+
+# Hugo cache directory (safe to delete)
+.hugo_build.lock
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Node / SCSS tooling (if used)
+node_modules/
+/*.log
+npm-debug.log*
+yarn-error.log*
+.pnpm-store/
+
+# Go build artifacts
+# (only relevant if this Hugo site includes custom Go code or modules)
+bin/
+*.exe
+*.dll
+*.so
+*.dylib
+*.test
+/go.sum~  # common editor backup
+
+# Temporary / backup files
+*~
+*.swp
+*.swo
+
+# VSCode / JetBrains / other editor junk
+.vscode/
+.idea/
+*.iml
+
+# Netlify / other deployment previews
+.netlify/
+
+# Theme submodules (if you prefer to keep themes as submodules)
+# Uncomment only if your workflow excludes committed theme files
+# themes/*
+# !themes/your-theme-name
