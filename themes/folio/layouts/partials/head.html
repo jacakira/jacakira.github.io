@@ -1,0 +1,54 @@
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ .Permalink }}" />
+
+<!-- Basic SEO -->
+<meta
+  name="description"
+  content="{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}"
+/>
+<meta name="author" content="{{ .Site.Params.author }}" />
+
+<!-- OpenGraph -->
+<meta property="og:title" content="{{ .Title }} · {{ .Site.Title }}" />
+<meta
+  property="og:description"
+  content="{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}"
+/>
+<meta
+  property="og:type"
+  content="{{ if .IsPage }}article{{ else }}website{{ end }}"
+/>
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+
+{{ if .Params.og_image }}
+<meta property="og:image" content="{{ .Params.og_image | absURL }}" />
+{{ else if .Site.Params.og_image }}
+<meta property="og:image" content="{{ .Site.Params.og_image | absURL }}" />
+{{ end }}
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="{{ .Site.Params.twitter }}" />
+<meta name="twitter:title" content="{{ .Title }}" />
+<meta
+  name="twitter:description"
+  content="{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}"
+/>
+{{ if .Params.og_image }}
+<meta name="twitter:image" content="{{ .Params.og_image | absURL }}" />
+{{ else if .Site.Params.og_image }}
+<meta name="twitter:image" content="{{ .Site.Params.og_image | absURL }}" />
+{{ end }}
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "{{ if .IsPage }}Article{{ else }}WebSite{{ end }}",
+    "headline": "{{ .Title }}",
+    "name": "{{ .Site.Title }}",
+    "url": "{{ .Permalink }}",
+    "description": "{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary }}{{ end }}"
+  }
+</script>

@@ -1,0 +1,33 @@
+baseURL = "https://jacakira.github.io"
+publishDir = "public"
+languageCode = "en-gb"
+title = "Akira Tanase"
+theme = "folio"
+disableFastRender = true
+cleanDestinationDir = true
+minify = true
+
+[params]
+  math = true
+  spotifyNowPlayingEndpoint = "http://127.0.0.1:3000/api/spotify-now-playing"
+  spotifyLastPlayedEndpoint = "http://127.0.0.1:3000/api/spotify-last-played"
+  description = "Akira Tanase — mathematics, machine learning"
+  author = "Akira Tanase"
+
+[params.disabledSections]
+  music = true
+  misc = true
+
+[markup.highlight]
+  noClasses = false
+  style = "none"
+  lineNos = true
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true
+
+  [markup.goldmark.extensions]
+    footnote = true
+
+

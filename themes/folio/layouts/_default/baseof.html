@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="{{ .Site.LanguageCode }}">
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ if .Title }}{{ .Title }} · {{ end }}{{ .Site.Title }}</title>
+    {{ partial "head.html" . }}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono&display=swap"
+      rel="stylesheet"
+    />
+
+    {{ $scss := resources.Get "scss/main.scss" | toCSS }}
+    <link rel="stylesheet" href="{{ $scss.RelPermalink }}" />
+
+    {{ if .Site.Params.math }}{{ partial "math.html" . }}{{ end }}
+  </head>
+  <body>
+    <div class="site-wrapper">
+      {{ partial "header.html" . }}
+
+      <main class="site-main">
+        <div class="content">{{ block "main" . }}{{ end }}</div>
+      </main>
+
+      {{ partial "footer.html" . }}
+    </div>
+  </body>
+</html>

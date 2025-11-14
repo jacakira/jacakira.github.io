@@ -1,0 +1,189 @@
+// ==========================================================
+// PAGE WRAPPER
+// ==========================================================
+
+.site-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+// ==========================================================
+// HEADER
+// ==========================================================
+
+.site-header {
+  height: $header-height;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.site-nav {
+  font-family: $font-header;
+  font-size: 1rem;
+}
+
+.site-nav a {
+  margin: 0 0.75rem;
+}
+
+.site-nav-separator {
+  margin: 0 0.25rem;
+  color: $color-muted;
+}
+
+// ==========================================================
+// MAIN CONTENT AREA
+// ==========================================================
+
+.site-main {
+  flex: 1;
+  padding: 0 1rem 2rem 1rem;
+}
+
+/* Centred column. Width is controlled ONLY by $max-width. */
+.content {
+  width: 100%;
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $content-padding 0;
+}
+
+// ==========================================================
+// FOOTER
+// ==========================================================
+
+.site-footer {
+  font-size: 0.7rem;
+  color: $color-muted;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.site-footer-inner {
+  max-width: $footer-max-width;
+  margin: 0 auto;
+  padding: 0 $content-padding;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+// ==========================================================
+// NOW PLAYING
+// ==========================================================
+
+.now-playing {
+  margin-top: 0rem;
+  font-family: $font-header;
+  font-size: 0.7rem;
+}
+
+// ==========================================================
+// RESPONSIVENESS
+// ==========================================================
+
+@media (min-width: $bp-tablet) {
+  html {
+    font-size: $base-font-size * 1.05;
+  }
+}
+
+@media (min-width: $bp-desktop) {
+  html {
+    font-size: $base-font-size * 1.1;
+  }
+  /* NOTE: no .content override here.
+     The width is always controlled by $max-width. */
+}
+
+// ==========================================================
+// FLOATING TABLE OF CONTENTS (right)
+// ==========================================================
+
+.floating-toc {
+  position: fixed;
+  top: 6rem;
+  right: 3rem; /* right gutter */
+  width: 210px;
+
+  max-height: 75vh;
+  overflow-y: auto;
+
+  font-size: 0.8rem;
+  line-height: 1.35;
+  font-family: $font-body;
+
+  padding-left: 1rem;
+  border-left: 1px solid rgba(0, 0, 0, 0.15);
+
+  color: $color-link;
+  z-index: 200;
+}
+
+/* Title */
+.toc-title {
+  margin-top: 0;
+  margin-bottom: 0.4rem;
+  font-size: 0.78rem;
+  // remove caps by commenting out this line:
+  // text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $color-muted;
+}
+
+/* Remove bullets */
+.floating-toc ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+/* normal entries */
+.floating-toc li {
+  margin: 0.12rem 0;
+}
+
+/* nested indent */
+.floating-toc ul ul {
+  margin-left: 0.8rem;
+}
+
+/* links */
+.floating-toc a {
+  text-decoration: none;
+  color: $color-link;
+}
+
+/* Hover */
+.floating-toc a:hover {
+  text-decoration: underline;
+}
+
+/* Active (current section) */
+.floating-toc a.active {
+  font-weight: 600;
+  color: $color-link;
+}
+
+/* Hide ToC below 1100px width */
+@media (max-width: 1400px) {
+  .floating-toc {
+    display: none !important;
+  }
+}
+
+.floating-toc .katex {
+  font-size: 0.75rem !important; // or whatever size
+}
+
+.floating-toc .katex .katex-html {
+  font-size: inherit !important;
+}
+
+.floating-toc .katex .katex-mathml {
+  font-size: inherit !important;
+}

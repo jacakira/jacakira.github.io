@@ -1,0 +1,92 @@
+/* ----------------------------------------------------
+   TAG CLOUD — CLEAN ACADEMIC STYLE
+---------------------------------------------------- */
+
+/* Container */
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.8rem;
+}
+
+/* -----------------------------------------
+   Base Tag Styling — Your Original Design
+------------------------------------------ */
+
+.tag-pill {
+  font-family: $font-header;
+  font-size: 0.95rem;
+  color: $color-muted;
+  text-decoration: none;
+}
+
+.tag-pill::before {
+  content: "[tag: ";
+  color: $color-muted;
+}
+
+.tag-pill::after {
+  content: "]";
+  color: $color-muted;
+}
+
+.tag-pill:hover {
+  color: $color-text;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* -----------------------------------------
+   Extra tags — hidden when collapsed
+------------------------------------------ */
+
+.tag-extra {
+  display: none;
+}
+
+/* When container has .is-expanded, show extras inline */
+.tag-cloud.is-expanded .tag-extra {
+  display: inline-block;
+}
+
+/* -----------------------------------------
+   Toggle Link (show/hide all tags)
+------------------------------------------ */
+
+.tag-toggle {
+  border: none;
+  padding: 0;
+  margin: 0 0.15rem;
+  background: none;
+  cursor: pointer;
+
+  font-family: $font-header;
+  font-size: 0.95rem;
+  color: $color-link;
+  text-decoration: none;
+}
+
+/* Bracket style to match tag pills */
+.tag-toggle::before {
+  content: "[";
+  color: $color-link;
+}
+
+.tag-toggle::after {
+  content: "]";
+  color: $color-link;
+}
+
+.tag-toggle:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* -----------------------------------------
+   Optional: make flex layout smoother
+------------------------------------------ */
+
+.tag-cloud * {
+  white-space: nowrap; /* prevents awkward wrapping on long tags */
+}

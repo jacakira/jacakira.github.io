@@ -1,0 +1,6 @@
+{{- $display := .Get "display" | default "true" -}} {{- if eq $display "true"
+-}}
+<span class="math-display">$$ {{- .Inner | safeHTML -}} $$</span>
+{{- else -}}
+<span class="math-inline">$ {{- .Inner | safeHTML -}} $</span>
+{{- end -}}

@@ -1,0 +1,19 @@
+name = 'Folio'
+license = 'MIT'
+licenselink = 'https://github.com/owner/repo/LICENSE'
+description = 'Beautiful theme for blogs and academic pages.'
+
+# The home page of the theme, where the source can be found
+homepage = 'https://github.com/jacakira/folio
+
+# If you have a running demo of the theme
+demosite = 'https://jacakira.github.io
+
+# Taxonomy terms
+tags = ['blog', 'company']
+features = ['some', 'awesome', 'features']
+
+# If the theme has a single author
+[author]
+  name = 'Akira Tanase'
+  homepage = 'jacakira.github.io'

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Miscs on Akira Tanase</title>
+    <link>http://localhost:64100/misc/</link>
+    <description>Recent content in Miscs on Akira Tanase</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <atom:link href="http://localhost:64100/misc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A Note on Reading Mathematics</title>
+      <link>http://localhost:64100/misc/note-on-reading/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:64100/misc/note-on-reading/</guid>
+      <description>People often talk about reading mathematics as if it were like reading a novel. It really is not.&#xA;A more realistic model: you are trying to compress a long argument into a small, robust mental structure. That requires:&#xA;Skimming for global structure Filling in local details where your intuition fails Trying to reproduce the argument from memory The posts on this site are written with that workflow in mind: they should be easy to skim, but also withstand careful reading.</description>
+    </item>
+  </channel>
+</rss>

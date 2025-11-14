@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Akira Tanase</title>
+    <link>http://localhost:64100/tags/</link>
+    <description>Recent content in Tags on Akira Tanase</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Wed, 26 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:64100/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Algebra</title>
+      <link>http://localhost:64100/tags/algebra/</link>
+      <pubDate>Wed, 26 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:64100/tags/algebra/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Math</title>
+      <link>http://localhost:64100/tags/math/</link>
+      <pubDate>Wed, 26 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:64100/tags/math/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Math.analysis</title>
+      <link>http://localhost:64100/tags/math.analysis/</link>
+      <pubDate>Wed, 26 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:64100/tags/math.analysis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Math.functional-Analysis</title>
+      <link>http://localhost:64100/tags/math.functional-analysis/</link>
+      <pubDate>Wed, 26 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:64100/tags/math.functional-analysis/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Math.hilbert-Spaces</title>
+      <link>http://localhost:64100/tags/math.hilbert-spaces/</link>
+      <pubDate>Wed, 26 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:64100/tags/math.hilbert-spaces/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Math.operator-Theory</title>
+      <link>http://localhost:64100/tags/math.operator-theory/</link>
+      <pubDate>Wed, 26 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:64100/tags/math.operator-theory/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Set-Theory</title>
+      <link>http://localhost:64100/tags/set-theory/</link>
+      <pubDate>Wed, 26 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:64100/tags/set-theory/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

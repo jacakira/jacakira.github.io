@@ -1,0 +1,263 @@
+// ---------------------------------------
+// TYPOGRAPHY SYSTEM
+// ---------------------------------------
+
+html {
+  font-size: $base-font-size; // master scaling
+}
+
+body {
+  font-family: $font-body;
+  font-size: 1rem; // baseline
+  line-height: 1.6;
+  color: $color-text;
+  background: $color-bg;
+  margin: 0;
+  padding: 0;
+}
+
+// ---------------------------------------
+// HEADINGS — modular scale
+// ---------------------------------------
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: $font-header;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: calc(#{$font-size-h1} / #{$base-font-size} * 1rem);
+  line-height: 1.2;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: calc(#{$font-size-h2} / #{$base-font-size} * 1rem);
+  line-height: 1.25;
+}
+
+h3 {
+  font-size: calc(#{$font-size-h3} / #{$base-font-size} * 1rem);
+  line-height: 1.32;
+}
+
+h4 {
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+// ---------------------------------------
+// PARAGRAPHS / LINKS
+// ---------------------------------------
+
+p {
+  margin: 1rem 0;
+}
+
+a {
+  color: $color-link;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// ---------------------------------------
+// INLINE CODE
+// ---------------------------------------
+
+code {
+  font-family: $font-mono;
+  font-size: 0.75rem;
+  background: $color-code-bg;
+  padding: 0.15rem 0.3rem;
+  border-radius: 3px;
+}
+
+// ---------------------------------------
+// BLOCK CODE  (Hugo + Chroma)
+// Matching inline styling, no frame, no margin jump
+// ---------------------------------------
+//
+// /* Chroma wrapper */
+// .chroma {
+//   background: $color-code-bg;
+//   border-radius: 3px;
+//   padding: 0.4rem 0.55rem;
+//   margin: 0.6rem 0;
+//   overflow-x: auto;
+//   font-family: $font-mono;
+//   font-size: 0.8rem;
+// }
+//
+// /* Remove inner background so we don't double-box */
+// .chroma pre {
+//   background: transparent;
+//   margin: 0;
+//   padding: 0;
+// }
+//
+// /* Fallback for plain <pre> blocks (non-Chroma) */
+// pre {
+//   font-family: $font-mono;
+//   background: $color-code-bg;
+//   border-radius: 3px;
+//   padding: 0.4rem 0.55rem;
+//   margin: 0.6rem 0;
+//   overflow-x: auto;
+//   font-size: 0.8rem;
+// }
+//
+// pre code {
+//   background: none;
+//   padding: 0;
+// }
+//
+// ---------------------------------------
+// KATEX MATH
+// ---------------------------------------
+
+.katex {
+  font-size: 0.9rem !important;
+}
+
+.katex-display {
+  font-size: 0.9rem;
+  margin: 1.2rem 0;
+  text-align: center;
+}
+
+// ---------------------------------------
+// FOOTNOTES — clean academic style
+// ---------------------------------------
+
+/* Remove default full-width HR */
+hr.footnotes-sep,
+hr.footnotes {
+  display: none !important;
+}
+
+.footnotes {
+  margin-top: 1.8rem;
+  padding-top: 1rem;
+  position: relative;
+}
+
+/* Short academic divider */
+.footnotes::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 35%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.footnotes ol {
+  padding-left: 1.1rem;
+  margin: 0;
+}
+
+.footnotes li {
+  margin-bottom: 0.5rem;
+  line-height: 1.32;
+  font-size: 0.8rem;
+  font-family: $font-body;
+}
+
+.footnotes li p {
+  display: inline;
+}
+
+/* Inline superscript numbers */
+sup[id^="fnref"] {
+  font-size: 0.7rem;
+  font-family: $font-body;
+}
+
+sup[id^="fnref"] a {
+  color: $color-link;
+  text-decoration: none;
+}
+
+/* Built-in backref (<a href="#fnref">) */
+.footnotes a[href^="#fnref"] {
+  color: $color-muted;
+  text-decoration: none;
+  margin-left: 0.25rem;
+  font-size: 0.8rem;
+  font-family: $font-body;
+}
+
+.footnotes a[href^="#fnref"]:hover {
+  color: $color-text;
+}
+
+/* Hide Hugo’s ugly ↩ and replace with [return] */
+a.footnote-backref {
+  font-size: 0; /* hide original */
+  width: 0;
+  overflow: visible;
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+a.footnote-backref::after {
+  content: "[return]";
+  font-size: 0.6rem;
+  color: $color-link;
+  margin-left: 0.2rem;
+  position: relative;
+  top: -0.04rem;
+}
+
+a.footnote-backref:hover::after {
+  color: $color-text;
+}
+
+/* Remove stray HR inside block */
+.footnotes > hr {
+  display: none !important;
+}
+
+/* FINAL OVERRIDE: make block code look like inline chips */
+
+.chroma {
+  background: $color-code-bg;
+  border-radius: 3px;
+  padding: 0.4rem 0.55rem;
+  margin: 0.6rem 0;
+  overflow-x: auto;
+  font-family: $font-mono;
+  font-size: 0.8rem;
+}
+
+.chroma pre {
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+/* Fallback for non-Chroma <pre> blocks */
+pre {
+  font-family: $font-mono;
+  background: $color-code-bg;
+  border-radius: 3px;
+  padding: 0.4rem 0.55rem;
+  margin: 0.6rem 0;
+  overflow-x: auto;
+  font-size: 0.8rem;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}

@@ -1,0 +1,129 @@
+{{ define "main" }}
+
+<section>
+
+  <header>
+    <h1>{{ .Title }}</h1>
+  </header>
+
+  <!-- ---------------------------------------- -->
+  <!-- TAG LIST WITH INLINE SHOW/HIDE TOGGLE    -->
+  <!-- ---------------------------------------- -->
+
+  {{/* Collect only blog posts */}}
+  {{ $blog := where .Site.RegularPages "Section" "blog" }}
+
+  {{/* Gather all tags used across blog */}}
+  {{ $tags := slice }}
+  {{ range $blog }}
+    {{ range .Params.tags }}
+      {{ $tags = $tags | append . }}
+    {{ end }}
+  {{ end }}
+
+  {{ $tags = $tags | uniq | sort }}
+
+  {{/* Number of tags shown initially */}}
+  {{ $k := 4 }}
+
+  {{ $top := first $k $tags }}
+  {{ $rest := after $k $tags }}
+
+  <div class="tag-cloud" id="tag-cloud">
+
+    <!-- First k tags -->
+    {{ range $top }}
+      <a class="tag-pill" href="{{ "/tags/" | relURL }}{{ . | urlize }}/">{{ . }}</a>
+    {{ end }}
+
+    <!-- Toggle + extra tags (only if we actually have more than k) -->
+    {{ if gt (len $tags) $k }}
+      <!-- Inline toggle -->
+      <button type="button"
+              class="tag-toggle"
+              data-state="collapsed">
+        show all tags
+      </button>
+
+      <!-- Extra tags, hidden until expanded -->
+      {{ range $rest }}
+        <a class="tag-pill tag-extra"
+           href="{{ "/tags/" | relURL }}{{ . | urlize }}/">
+          {{ . }}
+        </a>
+      {{ end }}
+    {{ end }}
+
+  </div>
+
+  <!-- ---------------------------------------- -->
+  <!-- ORIGINAL INDEX LOGIC                     -->
+  <!-- ---------------------------------------- -->
+
+  {{ if or (eq .Section "blog") (eq .Section "music") }}
+
+    {{ range .Pages.GroupByDate "2006" }}
+      <div class="index-year">
+        <div class="index-year-heading">{{ .Key }}</div>
+        <div class="index-year-rule"></div>
+
+        {{ range .Pages.ByDate.Reverse }}
+          <div class="index-entry">
+            <div class="index-entry-date">{{ .Date.Format "01/02" }}</div>
+            <div class="index-entry-title">
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            </div>
+          </div>
+        {{ end }}
+
+      </div>
+    {{ end }}
+
+  {{ else if eq .Section "misc" }}
+
+    {{ range .Pages.ByTitle }}
+      <div class="index-entry-nodate">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </div>
+    {{ end }}
+
+  {{ else }}
+
+    <ul>
+      {{ range .Pages.ByDate.Reverse }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{ end }}
+    </ul>
+
+  {{ end }}
+
+  <!-- ---------------------------------------- -->
+  <!-- INLINE SCRIPT: TAG TOGGLE LOGIC          -->
+  <!-- ---------------------------------------- -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var container = document.getElementById("tag-cloud");
+      if (!container) return;
+
+      var toggle = container.querySelector(".tag-toggle");
+      if (!toggle) return;  // happens when len(tags) <= k
+
+      var extras = container.querySelectorAll(".tag-extra");
+
+      // Initial state: collapsed
+      container.classList.remove("is-expanded");
+
+      toggle.addEventListener("click", function () {
+        var expanded = container.classList.toggle("is-expanded");
+        if (expanded) {
+          toggle.textContent = "hide all tags";
+        } else {
+          toggle.textContent = "show all tags";
+        }
+      });
+    });
+  </script>
+
+</section>
+
+{{ end }}

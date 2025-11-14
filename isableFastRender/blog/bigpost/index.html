@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en-gb">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=64100&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+    <title>Compact Operators and Spectral Intuition · Akira Tanase</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=IBM+Plex+Mono&display=swap"
+      rel="stylesheet"
+    />
+
+    
+    <link rel="stylesheet" href="/scss/main.css" />
+
+     <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '\\[', right: '\\]', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false}
+    ]
+  });"
+></script>
+ 
+  </head>
+  <body>
+    <div class="site-wrapper">
+      <header class="site-header">
+  <nav class="site-nav">
+    <a href="http://localhost:64100/">Home</a>
+    <span class="site-nav-separator">·</span>
+    <a href="/blog/">Blog</a>
+    <span class="site-nav-separator">·</span>
+    <a href="/about/">About</a>
+    <span class="site-nav-separator"></span>
+    
+    
+    
+  </nav>
+</header>
+
+
+      <main class="site-main">
+        <div class="content">
+
+<article class="post">
+  <header class="post-header">
+    <h1>Compact Operators and Spectral Intuition</h1>
+
+    
+      <p class="post-meta-date">
+        February 26, 2025
+      </p>
+    
+
+    
+      <p class="post-meta-tags">
+        
+          
+          <a href="/tags/math.functional-analysis" class="tag-inline">#math.functional-analysis</a>
+        
+           · 
+          <a href="/tags/math.operator-theory" class="tag-inline">#math.operator-theory</a>
+        
+           · 
+          <a href="/tags/math.hilbert-spaces" class="tag-inline">#math.hilbert-spaces</a>
+        
+           · 
+          <a href="/tags/math" class="tag-inline">#math</a>
+        
+           · 
+          <a href="/tags/math.analysis" class="tag-inline">#math.analysis</a>
+        
+      </p>
+    
+  </header>
+
+  <section class="post-content">
+
+    
+
+    
+
+    <p>Functional analysis has a reputation for being abstract and “soft”.<br>
+But once you internalise compact operators on Hilbert spaces, a lot of the theory suddenly feels almost finite-dimensional again.</p>
+<p>This post is a somewhat opinionated walkthrough of:</p>
+<ul>
+<li>compact operators on Hilbert spaces,</li>
+<li>the structure of their spectrum, and</li>
+<li>how to <em>think</em> about them using finite-dimensional approximations and a bit of code.</li>
+</ul>
+<p>Along the way we’ll sprinkle some numerical experiments and quotes, to make it feel less like lecture notes and more like a working notebook.</p>
+<hr>
+<h2 id="1-banach-vs-hilbert-setting-the-stage">1. Banach vs Hilbert: setting the stage</h2>
+<p>We’ll work mostly on a complex separable Hilbert space $H$, although some statements hold in general Banach spaces.</p>
+<p>Recall:</p>
+<ul>
+<li>A <strong>bounded linear operator</strong> $T : H \to H$ satisfies
+$$
+|T| ;=; \sup_{|x| = 1} |Tx| ;&lt;; \infty.
+$$</li>
+<li>The <strong>spectrum</strong> $\sigma(T)$ is
+$$
+\sigma(T) = {\lambda \in \mathbb{C} : T - \lambda I \text{ is not invertible}}.
+$$</li>
+</ul>
+<blockquote>
+<p>“The spectrum is the shadow that an operator casts on the complex plane.”<br>
+— loosely attributed to various functional analysts</p>
+</blockquote>
+<p>In finite dimensions, $\sigma(T)$ is just the set of eigenvalues. In infinite dimensions, all hell tries to break loose — but compact operators behave <strong>almost</strong> as if we were still finite-dimensional.</p>
+<hr>
+<h2 id="2-compact-operators-definitions-and-first-properties">2. Compact operators: definitions and first properties</h2>
+<h3 id="21-definition">2.1 Definition</h3>
+<p>A bounded linear operator $T : H \to H$ is called <strong>compact</strong> if it maps bounded sets to relatively compact sets, i.e.</p>
+<blockquote>
+<p>For every bounded set $B \subset H$, the closure $\overline{T(B)}$ is compact in $H$.</p>
+</blockquote>
+<p>Equivalently (and more concretely):</p>
+<blockquote>
+<p>$T$ is compact iff for every bounded sequence $(x_n)$ in $H$, the sequence $(Tx_n)$ has a convergent subsequence.</p>
+</blockquote>
+<p>This already feels like “finite dimensional behaviour”: in $\mathbb{C}^n$, bounded sets are relatively compact; compact operators mimic that property.</p>
+<h3 id="22-basic-examples">2.2 Basic examples</h3>
+<ol>
+<li>
+<p><strong>Finite rank operators</strong> are compact.<br>
+If $\dim(\operatorname{im} T) &lt; \infty$, then $T$ is compact.</p>
+</li>
+<li>
+<p><strong>Integral operators</strong> on $L^2$ with square-integrable kernel.<br>
+Let</p>
+<p>$$
+(Tf)(x) = \int_0^1 K(x,y) f(y),dy, \qquad f \in L^2([0,1]),
+$$</p>
+<p>where $K \in L^2([0,1]^2)$. Then $T$ is compact on $L^2$.</p>
+</li>
+<li>
+<p><strong>Inclusion maps</strong> between Sobolev spaces.<br>
+The inclusion $H^1_0(\Omega) \hookrightarrow L^2(\Omega)$ is compact if $\Omega$ is a nice bounded domain (Rellich–Kondrachov).</p>
+</li>
+</ol>
+<blockquote>
+<p>“Compactness is the poor person’s finite dimensionality.”<br>
+— every FA lecturer, at some point</p>
+</blockquote>
+<hr>
+<h2 id="3-spectrum-of-a-compact-operator">3. Spectrum of a compact operator</h2>
+<p>The key theorem to remember is:</p>
+<blockquote>
+<p><strong>Theorem (Structure of the spectrum of a compact operator).</strong><br>
+Let $T : H \to H$ be compact. Then:</p>
+<ol>
+<li>Every non-zero $\lambda \in \sigma(T)$ is an <strong>eigenvalue</strong> of finite multiplicity.</li>
+<li>The only possible accumulation point of $\sigma(T)$ is $0$.</li>
+<li>If $H$ is infinite-dimensional, then $0 \in \sigma(T)$.</li>
+</ol>
+</blockquote>
+<p>Schematic picture:</p>
+<ul>
+<li>$\sigma(T)$ is either ${0}$, or</li>
+<li>$0$ plus a sequence $(\lambda_n)$ of eigenvalues with $\lambda_n \to 0$.</li>
+</ul>
+<h3 id="31-a-quick-proof-sketch-intuition-only">3.1 A quick proof sketch (intuition only)</h3>
+<p>Let’s outline why non-zero points in the spectrum must be eigenvalues.</p>
+<p>This is a sentence that needs a footnote.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>Another footnote example appears here.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>Suppose $\lambda \neq 0$ and $(T - \lambda I)$ is not invertible. We want to find $x \neq 0$ such that $Tx = \lambda x$.</p>
+<ul>
+<li>Show first that $\operatorname{im}(T - \lambda I)$ is closed and has finite codimension. This uses compactness and the Fredholm alternative.</li>
+<li>Then $(T - \lambda I)$ fails to be injective or surjective.</li>
+<li>In either case, you can produce a nonzero solution of $(T - \lambda I)x = 0$.</li>
+</ul>
+<p>This is essentially the infinite-dimensional echo of the finite-dimensional fact “if a matrix is not invertible, $0$ is an eigenvalue”.</p>
+<hr>
+<h2 id="4-self-adjoint-compact-operators-almost-diagonal-matrices">4. Self-adjoint compact operators: almost diagonal matrices</h2>
+<p>On a Hilbert space, the jewel in the crown is the <strong>spectral theorem</strong>.</p>
+<blockquote>
+<p><strong>Theorem (Spectral theorem for compact self-adjoint operators).</strong><br>
+Let $T : H \to H$ be compact and self-adjoint ($T = T^*$). Then there exists an orthonormal basis $(e_n)$ of $H$ and a sequence of real numbers $(\lambda_n)$ with $\lambda_n \to 0$ such that</p>
+<p>$$
+T x = \sum_{n} \lambda_n \langle x, e_n \rangle e_n, \qquad \forall x \in H.
+$$</p>
+<p>Equivalently, $T$ is unitarily diagonalizable with real eigenvalues accumulating only at $0$.</p>
+</blockquote>
+<p>So in the right basis, $T$ looks like a diagonal matrix with entries $\lambda_1, \lambda_2, \dots$ tending to $0$.</p>
+<p>This is why compact self-adjoint operators feel like “infinite symmetric matrices with eigenvalues decaying to $0$”.</p>
+<hr>
+<h2 id="5-a-concrete-example-an-integral-operator-on-l201">5. A concrete example: an integral operator on $L^2[0,1]$</h2>
+<p>Consider the operator</p>
+<p>$$
+(Tf)(x) = \int_0^1 \min(x,y), f(y),dy, \qquad f \in L^2([0,1]).
+$$</p>
+<p>One can show that $T$ is self-adjoint, positive, and compact. In fact, it corresponds to the Green’s operator for the 1D Laplacian with Dirichlet boundary conditions.</p>
+<p>The eigenfunctions and eigenvalues are given by</p>
+<p>$$
+e_n(x) = \sqrt{2}, \sin(n \pi x), \qquad
+\lambda_n = \frac{1}{(n\pi)^2}, \qquad n \in \mathbb{N}.
+$$</p>
+<p>So</p>
+<p>$$
+T f = \sum_{n=1}^\infty \lambda_n, \langle f, e_n \rangle e_n,
+$$</p>
+<p>with $\lambda_n \to 0$ quadratically.</p>
+<hr>
+<h2 id="6-a-small-numerical-experiment-python">6. A small numerical experiment (Python)</h2>
+<p>Let’s approximate $T$ on a grid and look at its eigenvalues. We’ll discretise $[0,1]$ into $N$ points and approximate the integral by a Riemann sum.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">build_T_matrix</span><span class="p">(</span><span class="n">N</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    Discretise the operator
+</span></span></span><span class="line"><span class="cl"><span class="s2">        (Tf)(x) = ∫_0^1 min(x, y) f(y) dy
+</span></span></span><span class="line"><span class="cl"><span class="s2">    on a uniform grid of N points in [0, 1].
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dx</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># K_ij = min(x_i, x_j)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">X_i</span><span class="p">,</span> <span class="n">X_j</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">indexing</span><span class="o">=</span><span class="s2">&#34;ij&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">X_i</span><span class="p">,</span> <span class="n">X_j</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Approximate integral by Riemann sum: T ≈ K * dx</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">K</span> <span class="o">*</span> <span class="n">dx</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">N</span> <span class="o">=</span> <span class="mi">200</span>
+</span></span><span class="line"><span class="cl"><span class="n">T</span> <span class="o">=</span> <span class="n">build_T_matrix</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Compute eigenvalues (since T is symmetric, use eigh)</span>
+</span></span><span class="line"><span class="cl"><span class="n">evals</span><span class="p">,</span> <span class="n">evecs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Sort in descending order</span>
+</span></span><span class="line"><span class="cl"><span class="n">evals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">evals</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">evals</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&#34;o&#34;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&#34;none&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&#34;Eigenvalues of discretised T (semilogy)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&#34;index&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&#34;eigenvalue (log scale)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>This is the content of the first footnote.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink"></a></p>
+</li>
+<li id="fn:2">
+<p>This explains something related to the theorem above.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink"></a></p>
+</li>
+</ol>
+</div>
+
+
+  </section>
+</article>
+
+</div>
+      </main>
+
+      <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="now-playing" 
+     data-now-playing
+     data-endpoint="http://127.0.0.1:3000/api/spotify-now-playing">
+</div>
+
+<script src="/js/spotify-now-playing.js"></script>
+
+    <div>&copy; 2025 Akira Tanase</div>
+  </div>
+</footer>
+
+    </div>
+
+    <script src="/js/tag-filter.js"></script>
+  </body>
+</html>

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en-gb">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=64100&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+    <title>Quotients, Intuitively · Akira Tanase</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600&family=IBM+Plex+Mono&display=swap"
+      rel="stylesheet"
+    />
+
+    
+    <link rel="stylesheet" href="/scss/main.css" />
+
+     <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+/>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+></script>
+
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {
+    delimiters: [
+      {left: '$$', right: '$$', display: true},
+      {left: '\\[', right: '\\]', display: true},
+      {left: '$', right: '$', display: false},
+      {left: '\\(', right: '\\)', display: false}
+    ]
+  });"
+></script>
+ 
+  </head>
+  <body>
+    <div class="site-wrapper">
+      <header class="site-header">
+  <nav class="site-nav">
+    <a href="http://localhost:64100/">Home</a>
+    <span class="site-nav-separator">·</span>
+    <a href="/blog/">Blog</a>
+    <span class="site-nav-separator">·</span>
+    <a href="/about/">About</a>
+    <span class="site-nav-separator"></span>
+    
+    
+    
+  </nav>
+</header>
+
+
+      <main class="site-main">
+        <div class="content">
+
+<article class="post">
+  <header class="post-header">
+    <h1>Quotients, Intuitively</h1>
+
+    
+      <p class="post-meta-date">
+        February 26, 2025
+      </p>
+    
+
+    
+      <p class="post-meta-tags">
+        
+          
+          <a href="/tags/algebra" class="tag-inline">#algebra</a>
+        
+           · 
+          <a href="/tags/set-theory" class="tag-inline">#set-theory</a>
+        
+      </p>
+    
+  </header>
+
+  <section class="post-content">
+
+    
+
+    
+
+    <p>Quotients are one of those ideas that appear everywhere. At a very crude level, a quotient is what you get when you declare some points to be <em>the same</em>.</p>
+<p>Formally, start with a set $X$ and an equivalence relation $\sim$ on $X$. The quotient $X / \sim$ is the set of equivalence classes $[x]$, where</p>
+<p>$$
+[x] = { y \in X : y \sim x }.
+$$</p>
+<p>The canonical surjection</p>
+<p>$$
+\pi : X \to X / \sim, \quad x \mapsto [x]
+$$</p>
+<p>is universal among maps that respect the relation $\sim$ in a suitable sense.</p>
+<p>We can see the same pattern in:</p>
+<ul>
+<li>Modular arithmetic: $\mathbb{Z} / n\mathbb{Z}$</li>
+<li>Topology: gluing edges of a square to obtain a torus</li>
+<li>Linear algebra: quotient spaces $V / W$</li>
+</ul>
+<p>A useful mental model: a quotient is a <strong>controlled loss of information</strong>; we crush certain distinctions while trying to keep as much structure as possible.</p>
+
+
+  </section>
+</article>
+
+</div>
+      </main>
+
+      <footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="now-playing" 
+     data-now-playing
+     data-endpoint="http://127.0.0.1:3000/api/spotify-now-playing">
+</div>
+
+<script src="/js/spotify-now-playing.js"></script>
+
+    <div>&copy; 2025 Akira Tanase</div>
+  </div>
+</footer>
+
+    </div>
+
+    <script src="/js/tag-filter.js"></script>
+  </body>
+</html>

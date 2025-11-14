@@ -1,0 +1,54 @@
+// ---------------------------------------
+// VARIABLES — MASTER TYPOGRAPHIC SYSTEM
+// ---------------------------------------
+
+// Base type scale — THIS controls the entire site.
+$base-font-size: 18px; // ← Increase to scale the entire website
+$scale-ratio: 1.25; // Academic modular scale
+
+// Derived sizes from modular scale
+$font-size-body: $base-font-size;
+$font-size-h3: $font-size-body * $scale-ratio;
+$font-size-h2: $font-size-h3 * $scale-ratio;
+$font-size-h1: $font-size-h2 * $scale-ratio;
+
+// Small text (footer, captions, etc.)
+$font-size-small: $base-font-size * 0.85;
+
+// ---------------------------------------
+// FONTS
+// ---------------------------------------
+$font-body: "EB Garamond", serif;
+$font-header: "EB Garamond", serif;
+$font-mono: "IBM Plex Mono", monospace;
+// $font-body: "IBM Plex Sans", sans-serif;
+// $font-header: "IBM Plex Sans", sans-serif;
+
+// ---------------------------------------
+// COLORS
+// ---------------------------------------
+$color-text: #1a1a1a;
+$color-muted: #666;
+
+// Background colors
+$color-bg: #ffffff;
+
+// Code block background (used in utilities)
+$color-code-bg: #f5f5f5;
+
+// Link color
+$color-link: #8172a8;
+
+// ---------------------------------------
+// LAYOUT CONSTANTS
+// ---------------------------------------
+$max-width: 600px;
+$footer-max-width: 850px; // or 1200px, or whatever feels right
+$content-padding: 1.5rem;
+$header-height: 4rem;
+
+// ---------------------------------------
+// BREAKPOINTS
+// ---------------------------------------
+$bp-tablet: 640px;
+$bp-desktop: 960px;

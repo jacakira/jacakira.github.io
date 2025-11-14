@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Musics on Akira Tanase</title>
+    <link>http://localhost:64100/music/</link>
+    <description>Recent content in Musics on Akira Tanase</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 12 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:64100/music/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Listening Log: Week 1</title>
+      <link>http://localhost:64100/music/week1/</link>
+      <pubDate>Sun, 12 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:64100/music/week1/</guid>
+      <description>Some things I listened to this week:&#xA;An annoyingly catchy pop album A dense modern jazz record that I only half-understand A string quartet where the harmonic language felt weirdly “probabilistic” One recurring thought: a lot of music feels like it is exploring a space of transformations rather than a fixed melody. That is not far from how I think about symmetry groups in mathematics.</description>
+    </item>
+  </channel>
+</rss>

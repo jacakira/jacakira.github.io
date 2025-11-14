@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mathematics on Akira Tanase</title>
+    <link>http://localhost:64100/categories/mathematics/</link>
+    <description>Recent content in Mathematics on Akira Tanase</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Wed, 26 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:64100/categories/mathematics/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Compact Operators and Spectral Intuition</title>
+      <link>http://localhost:64100/blog/bigpost/</link>
+      <pubDate>Wed, 26 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:64100/blog/bigpost/</guid>
+      <description>Functional analysis has a reputation for being abstract and “soft”.&#xA;But once you internalise compact operators on Hilbert spaces, a lot of the theory suddenly feels almost finite-dimensional again.&#xA;This post is a somewhat opinionated walkthrough of:&#xA;compact operators on Hilbert spaces, the structure of their spectrum, and how to think about them using finite-dimensional approximations and a bit of code. Along the way we’ll sprinkle some numerical experiments and quotes, to make it feel less like lecture notes and more like a working notebook.</description>
+    </item>
+    <item>
+      <title>Quotients, Intuitively</title>
+      <link>http://localhost:64100/blog/quotient/</link>
+      <pubDate>Wed, 26 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:64100/blog/quotient/</guid>
+      <description>Quotients are one of those ideas that appear everywhere. At a very crude level, a quotient is what you get when you declare some points to be the same.&#xA;Formally, start with a set $X$ and an equivalence relation $\sim$ on $X$. The quotient $X / \sim$ is the set of equivalence classes $[x]$, where&#xA;$$ [x] = { y \in X : y \sim x }. $$&#xA;The canonical surjection</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,25 @@
+{{ define "main" }}
+
+<section>
+  <header>
+    <h1>Tag: {{ .Title }}</h1>
+  </header>
+
+  {{ range .Pages.GroupByDate "2006" }}
+  <div class="index-year">
+    <div class="index-year-heading">{{ .Key }}</div>
+    <div class="index-year-rule"></div>
+
+    {{ range .Pages.ByDate.Reverse }}
+    <div class="index-entry">
+      <div class="index-entry-date">{{ .Date.Format "01/02" }}</div>
+      <div class="index-entry-title">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      </div>
+    </div>
+    {{ end }}
+  </div>
+  {{ end }}
+</section>
+
+{{ end }}

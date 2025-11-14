@@ -1,0 +1,53 @@
+{{ define "main" }}
+
+<div class="single-container">
+
+  {{/* ----------------------------------------------------
+       FLOATING TABLE OF CONTENTS
+       Appears only if:
+         - front matter has showTOC: true
+         - page has headings
+  ------------------------------------------------------ */}}
+  {{ if and (.Params.showTOC) (.TableOfContents) }}
+    <aside class="floating-toc">
+      <h3 class="toc-title">Contents</h3>
+      <nav class="toc-nav">
+        {{ .TableOfContents }}
+      </nav>
+    </aside>
+  {{ end }}
+
+  <article>
+    <header>
+      <h1>{{ .Title }}</h1>
+
+      {{ if or (eq .Section "blog") (eq .Section "music") }}
+        <p class="post-date">{{ .Date.Format "January 2, 2006" }}</p>
+      {{ end }}
+
+      {{ if .Params.tags }}
+        <div class="post-tags">
+          {{ range .Params.tags }}
+            <a href="{{ "/tags/" | relURL }}{{ . | urlize }}/" class="tag-pill">{{ . }}</a>
+          {{ end }}
+        </div>
+      {{ end }}
+    </header>
+
+    <section class="post-content">
+
+      {{/* ----------------------------------------------------
+           REMOVE GOLDMARK BACKREF ARROWS
+      ------------------------------------------------------ */}}
+      {{ $clean := .Content
+          | replaceRE `(<a[^>]*class="footnote-backref"[^>]*>)[^<]*(</a>)`
+                       `${1}${2}` }}
+
+      {{ $clean | safeHTML }}
+
+    </section>
+  </article>
+
+</div>
+
+{{ end }}
