@@ -1,7 +1,7 @@
 ---
 title: "Folio Theme"
 date: 2025-11-14
-draft: true
+draft: false
 tags: ["math", "math.PR", "math.CA", "math.AT"]
 categories: ["misc"]
 showTOC: true
