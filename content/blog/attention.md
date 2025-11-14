@@ -13,4 +13,4 @@ Before 2017, machine translation tasks were
 
 ## Attention
 
-In attention, we begin with a vector
+In attention, we begin with a vector of
