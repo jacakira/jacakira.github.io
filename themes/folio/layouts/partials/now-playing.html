@@ -1,6 +1,7 @@
-<div class="now-playing" 
+<div class="now-playing"
      data-now-playing
-     data-endpoint="http://127.0.0.1:3000/api/spotify-now-playing">
+     data-now-endpoint="{{ .Site.Params.spotifyNowPlayingEndpoint }}"
+     data-last-endpoint="{{ .Site.Params.spotifyLastPlayedEndpoint }}">
 </div>
 
 <script src="{{ "js/spotify-now-playing.js" | relURL }}"></script>

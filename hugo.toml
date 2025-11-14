@@ -10,9 +10,9 @@ minify = true
 [params]
   math = true
   description = "Akira Tanase — mathematics, machine learning"
-  spotifyNowPlayingEndpoint = "https://spotify-backend-alpha.vercel.app/api/spotify-now-playing"
-  spotifyLastPlayedEndpoint = "https://spotify-backend-alpha.vercel.app/api/spotify-last-played"
   author = "Akira Tanase"
+  spotifyNowPlayingEndpoint = "https://spotify-backend-ivory.vercel.app/api/spotify-now-playing"
+  spotifyLastPlayedEndpoint = "https://spotify-backend-ivory.vercel.app/api/spotify-last-played"
 
 [params.disabledSections]
   music = true

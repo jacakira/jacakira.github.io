@@ -13,4 +13,10 @@ Before 2017, machine translation tasks were
 
 ## Attention
 
+## Self Attention
+
 In attention, we begin with a vector of
+
+## Multi-head Attention
+
+In

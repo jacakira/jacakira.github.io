@@ -1,71 +1,83 @@
+// themes/folio/static/js/spotify-now-playing.js
 (function () {
-  let lastState = null; // last known track info from backend
-  let lastActive = 0; // timestamp of last "isPlaying:true"
+  let lastState = null; // last known track info
+  let lastActive = 0; // timestamp when we last saw isPlaying=true
   const GRACE_PERIOD = 15000; // 15 seconds
-  const CACHE_URL = "http://127.0.0.1:3000/api/spotify-cache";
 
-  // Load last saved state from localStorage (survives refresh)
+  // Restore from localStorage (persists between page loads)
   const stored = localStorage.getItem("spotify_last_state");
   if (stored) {
     try {
       lastState = JSON.parse(stored);
-    } catch (_) {}
+    } catch (_) {
+      lastState = null;
+    }
   }
 
   async function update(element) {
+    const nowEndpoint = element.getAttribute("data-now-endpoint");
+    const lastEndpoint = element.getAttribute("data-last-endpoint");
+    const now = Date.now();
+
     try {
-      const npEndpoint = element.getAttribute("data-endpoint");
-      const r = await fetch(npEndpoint, { cache: "no-store" });
-      const data = await r.json();
-      const now = Date.now();
+      // ===== 1. Try "now playing" =====
+      if (nowEndpoint) {
+        const r = await fetch(nowEndpoint, { cache: "no-store" });
+        const data = await r.json();
 
-      // ============== CASE 1: ACTUALLY PLAYING ==============
-      if (data && data.isPlaying) {
-        lastActive = now;
-        lastState = { track: data.track, artist: data.artist };
+        if (data && data.isPlaying) {
+          lastActive = now;
+          lastState = { track: data.track, artist: data.artist };
 
-        localStorage.setItem("spotify_last_state", JSON.stringify(lastState));
+          localStorage.setItem("spotify_last_state", JSON.stringify(lastState));
 
-        element.textContent =
-          "Now playing: " + data.track + " — " + data.artist;
-        return;
+          element.textContent =
+            "Now playing: " + data.track + " — " + data.artist;
+          return;
+        }
       }
 
-      // ========== CASE 2: GRACE PERIOD (avoid flicker) =======
+      // ===== 2. Grace period: still show last track briefly =====
       if (lastState && now - lastActive < GRACE_PERIOD) {
         element.textContent =
           "Now playing: " + lastState.track + " — " + lastState.artist;
         return;
       }
 
-      // ========== CASE 3: TRY BACKEND CACHE ==================
-      try {
-        const r2 = await fetch(CACHE_URL, { cache: "no-store" });
-        const cache = await r2.json();
+      // ===== 3. Query "last played" from backend =====
+      if (lastEndpoint) {
+        try {
+          const r2 = await fetch(lastEndpoint, { cache: "no-store" });
+          const cache = await r2.json();
 
-        if (cache && cache.track) {
-          element.textContent =
-            "Last played: " + cache.track + " — " + cache.artist;
+          if (cache && cache.track) {
+            const track = cache.track;
+            const artist = cache.artist;
 
-          // Save for offline
-          localStorage.setItem("spotify_last_state", JSON.stringify(cache));
-          return;
+            element.textContent = "Last played: " + track + " — " + artist;
+
+            localStorage.setItem(
+              "spotify_last_state",
+              JSON.stringify({ track, artist }),
+            );
+            return;
+          }
+        } catch (_) {
+          // ignore, fall back below
         }
-      } catch (_) {
-        // backend cache unreachable → ignore
       }
 
-      // ========== CASE 4: FALLBACK TO localStorage ===========
+      // ===== 4. Fallback to localStorage only =====
       if (lastState) {
         element.textContent =
           "Last played: " + lastState.track + " — " + lastState.artist;
         return;
       }
 
-      // ========== CASE 5: NOTHING AVAILABLE ==================
+      // ===== 5. Nothing to show =====
       element.textContent = "";
     } catch (err) {
-      // Full fallback
+      // On any error, fallback to cached state if we have one
       if (lastState) {
         element.textContent =
           "Last played: " + lastState.track + " — " + lastState.artist;
@@ -78,6 +90,8 @@
     if (!el) return;
 
     update(el);
-    setInterval(() => update(el), 8000);
+    setInterval(function () {
+      update(el);
+    }, 8000);
   });
 })();
