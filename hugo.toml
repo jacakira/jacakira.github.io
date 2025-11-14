@@ -9,9 +9,9 @@ minify = true
 
 [params]
   math = true
-  spotifyNowPlayingEndpoint = "http://127.0.0.1:3000/api/spotify-now-playing"
-  spotifyLastPlayedEndpoint = "http://127.0.0.1:3000/api/spotify-last-played"
   description = "Akira Tanase — mathematics, machine learning"
+  spotifyNowPlayingEndpoint = "https://spotify-backend-alpha.vercel.app/api/spotify-now-playing"
+  spotifyLastPlayedEndpoint = "https://spotify-backend-alpha.vercel.app/api/spotify-last-played"
   author = "Akira Tanase"
 
 [params.disabledSections]
