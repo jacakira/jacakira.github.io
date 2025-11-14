@@ -29,11 +29,6 @@ I am an undergraduate mathematics student at [Imperial College London](https://w
 
 ### Other Experience
 
-**Project on Topological Data Analysis**, Imperial College London  
-<span class="about-date">June 2025</span>
-
-- Work with Prof. Anthea Monod’s group on persistent homology, cohomology, structure theorems, and stability.
-
 **Lead**, [Imperial College MathsWiki](https://imperialmathswiki.com/)
 
 - Principal administrator of the MathsWiki, a centralised repository of course materials used by students across the department.
