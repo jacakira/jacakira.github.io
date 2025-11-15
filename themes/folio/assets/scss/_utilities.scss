@@ -3,55 +3,45 @@ hr {
   border-top: 1px solid rgba(0, 0, 0, 0.08);
   margin: 2rem 0;
 }
-/* emphasized */
+
 em {
   font-style: italic;
 }
-
-/* strong */
 strong {
   font-weight: 600;
 }
 
-/* Lists in index pages */
+/* Index pages */
 .index-year {
   margin-top: 2rem;
 }
-
 .index-year-heading {
   font-family: $font-header;
   font-weight: 500;
   margin-bottom: 0.3rem;
 }
-
 .index-year-rule {
   height: 1px;
   background: rgba(0, 0, 0, 0.08);
   margin-bottom: 0.6rem;
 }
-
 .index-entry {
   display: flex;
   font-size: 0.98rem;
   margin-bottom: 0.15rem;
 }
-
 .index-entry-date {
-  width: 4.5rem; // enough for "MM/DD"
+  width: 4.5rem;
   font-family: $font-header;
   color: $color-muted;
 }
-
 .index-entry-title {
   flex: 1;
   text-align: left;
 }
-
 .index-entry-title a {
   text-decoration: none;
 }
-
-/* For misc index (no dates) */
 .index-entry-nodate {
   margin-bottom: 0.15rem;
   text-align: left;
@@ -66,33 +56,37 @@ strong {
    ACADEMIC CODE BLOCKS — minimal, paper-like
    ============================================================ */
 
+/* Fallback <pre> (no chroma) */
 pre {
   margin: 1.2rem 0;
-  padding: 0; /* remove big padding */
-  background: none; /* no background box */
-  border-radius: 0; /* no rounding */
+  padding: 0;
+  background: none;
+  border-radius: 0;
   overflow-x: auto;
 }
 
 pre code {
   font-family: $font-mono;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   line-height: 1.45;
   background: none;
   padding: 0;
 }
 
-/* Chroma root container */
+/* Chroma root */
 .chroma {
   background: none;
   padding: 0;
   display: block;
   overflow-x: auto;
+
+  font-family: $font-mono;
+  font-size: 0.85rem; /* ← global uniform size */
+  line-height: 1.45;
 }
 
-/* Line table: numbers + code */
 .chroma table {
-  border-spacing: 0; /* remove table gaps */
+  border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
 }
@@ -102,50 +96,26 @@ pre code {
   vertical-align: top;
 }
 
-/* -----------------------------
-   LINE NUMBERS
-   ----------------------------- */
-
-.chroma .ln {
-  font-family: $font-mono;
-  font-size: 0.85rem;
-  color: $color-muted; /* ← muted academic grey */
-  text-align: right;
-  padding-right: 1rem; /* gutter between numbers & code */
-  user-select: none;
-}
-
-/* optional softer line numbers */
-.chroma .lnt {
-  opacity: 0.75;
-}
-
-/* -----------------------------
-   CODE COLUMN
-   ----------------------------- */
-
+/* Line numbers + code should match exactly */
+.chroma .ln,
 .chroma .code {
+  font-size: inherit; /* ← SAME size */
   font-family: $font-mono;
-  font-size: 0.92rem;
 }
 
-/* Keep code nicely aligned */
+/* Chroma pre wrapper */
 .chroma pre {
   padding: 0;
   margin: 0;
 }
 
-/* Remove any default Hugo/Chroma borders */
 .chroma .line {
   padding: 0;
   margin: 0;
 }
 
-/* -----------------------------
-   Syntax colors — minimal
-   ----------------------------- */
+/* Syntax colours */
 
-/* Comments */
 .chroma .c,
 .chroma .c1,
 .chroma .cm {
@@ -153,41 +123,35 @@ pre code {
   font-style: italic;
 }
 
-/* Keywords */
 .chroma .k {
   color: $color-link;
 }
 
-/* Strings */
 .chroma .s {
   color: #8b4c00;
 }
 
-/* Numbers */
 .chroma .m {
   color: #005555;
 }
 
 /* ============================================================
-   BLOCKQUOTES — academic style
+   BLOCKQUOTES
    ============================================================ */
 
 blockquote {
-  font-family: $font-header; /* EB Garamond */
+  font-family: $font-header;
   font-style: italic;
   color: $color-text;
-
-  border-left: 2px solid $color-muted; /* muted vertical rule */
-  padding-left: 1rem; /* breathing room */
+  border-left: 2px solid $color-muted;
+  padding-left: 1rem;
   margin: 1.6rem 0;
-
   line-height: 1.55;
 }
 
 blockquote p {
-  margin: 0; /* paragraphs inside quotes */
+  margin: 0;
 }
-
 blockquote em {
-  font-style: italic; /* ensure emphasis inside is italic */
+  font-style: italic;
 }

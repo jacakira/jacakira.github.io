@@ -3,12 +3,12 @@
 // ---------------------------------------
 
 html {
-  font-size: $base-font-size; // master scaling
+  font-size: $base-font-size;
 }
 
 body {
   font-family: $font-body;
-  font-size: 1rem; // baseline
+  font-size: 1rem;
   line-height: 1.6;
   color: $color-text;
   background: $color-bg;
@@ -82,45 +82,6 @@ code {
 }
 
 // ---------------------------------------
-// BLOCK CODE  (Hugo + Chroma)
-// Matching inline styling, no frame, no margin jump
-// ---------------------------------------
-//
-// /* Chroma wrapper */
-// .chroma {
-//   background: $color-code-bg;
-//   border-radius: 3px;
-//   padding: 0.4rem 0.55rem;
-//   margin: 0.6rem 0;
-//   overflow-x: auto;
-//   font-family: $font-mono;
-//   font-size: 0.8rem;
-// }
-//
-// /* Remove inner background so we don't double-box */
-// .chroma pre {
-//   background: transparent;
-//   margin: 0;
-//   padding: 0;
-// }
-//
-// /* Fallback for plain <pre> blocks (non-Chroma) */
-// pre {
-//   font-family: $font-mono;
-//   background: $color-code-bg;
-//   border-radius: 3px;
-//   padding: 0.4rem 0.55rem;
-//   margin: 0.6rem 0;
-//   overflow-x: auto;
-//   font-size: 0.8rem;
-// }
-//
-// pre code {
-//   background: none;
-//   padding: 0;
-// }
-//
-// ---------------------------------------
 // KATEX MATH
 // ---------------------------------------
 
@@ -135,10 +96,9 @@ code {
 }
 
 // ---------------------------------------
-// FOOTNOTES — clean academic style
+// FOOTNOTES
 // ---------------------------------------
 
-/* Remove default full-width HR */
 hr.footnotes-sep,
 hr.footnotes {
   display: none !important;
@@ -150,7 +110,6 @@ hr.footnotes {
   position: relative;
 }
 
-/* Short academic divider */
 .footnotes::before {
   content: "";
   position: absolute;
@@ -177,7 +136,6 @@ hr.footnotes {
   display: inline;
 }
 
-/* Inline superscript numbers */
 sup[id^="fnref"] {
   font-size: 0.7rem;
   font-family: $font-body;
@@ -188,7 +146,6 @@ sup[id^="fnref"] a {
   text-decoration: none;
 }
 
-/* Built-in backref (<a href="#fnref">) */
 .footnotes a[href^="#fnref"] {
   color: $color-muted;
   text-decoration: none;
@@ -201,9 +158,8 @@ sup[id^="fnref"] a {
   color: $color-text;
 }
 
-/* Hide Hugo’s ugly ↩ and replace with [return] */
 a.footnote-backref {
-  font-size: 0; /* hide original */
+  font-size: 0;
   width: 0;
   overflow: visible;
   display: inline-block;
@@ -223,41 +179,6 @@ a.footnote-backref:hover::after {
   color: $color-text;
 }
 
-/* Remove stray HR inside block */
 .footnotes > hr {
   display: none !important;
-}
-
-/* FINAL OVERRIDE: make block code look like inline chips */
-
-.chroma {
-  background: $color-code-bg;
-  border-radius: 3px;
-  padding: 0.4rem 0.55rem;
-  margin: 0.6rem 0;
-  overflow-x: auto;
-  font-family: $font-mono;
-  font-size: 0.8rem;
-}
-
-.chroma pre {
-  background: transparent;
-  margin: 0;
-  padding: 0;
-}
-
-/* Fallback for non-Chroma <pre> blocks */
-pre {
-  font-family: $font-mono;
-  background: $color-code-bg;
-  border-radius: 3px;
-  padding: 0.4rem 0.55rem;
-  margin: 0.6rem 0;
-  overflow-x: auto;
-  font-size: 0.8rem;
-}
-
-pre code {
-  background: none;
-  padding: 0;
 }
