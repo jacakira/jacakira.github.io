@@ -175,14 +175,25 @@ a.footnote-backref:hover::after {
   color: $color-text;
 }
 
+/* Reduce KaTeX size inside footnotes */
+.footnotes .katex {
+  font-size: 0.75rem !important; // adjust to taste
+}
+
+.footnotes .katex-display {
+  font-size: 0.75rem !important; // same scaling for display math
+  margin: 0.6rem 0; // tighter spacing for footnotes
+}
+
 .now-playing a.now-playing-link {
-  color: inherit;
+  color: $color-muted;
   text-decoration: none;
   cursor: pointer;
 }
 
 .now-playing a.now-playing-link:hover {
   text-decoration: underline;
+  color: $color-muted;
 }
 
 // ---------------------------------------
@@ -218,6 +229,60 @@ pre {
 pre code {
   background: none;
   padding: 0;
+}
+
+/* ============================================================
+   JAPANESE TYPOGRAPHY – HIGH PERFORMANCE VERSION
+   ============================================================ */
+
+/* Global JP font trigger */
+.jp {
+  font-family: "Shippori Mincho B1", serif !important;
+}
+
+/* Body text */
+.jp {
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+/* Headings */
+.jp h1 {
+  font-size: 1.9rem;
+}
+.jp h2 {
+  font-size: 1.55rem;
+}
+.jp h3 {
+  font-size: 1.32rem;
+}
+.jp h4 {
+  font-size: 1.15rem;
+}
+
+/* Footnotes */
+.jp .footnotes {
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.jp .footnotes .katex {
+  font-size: 0.72rem !important;
+}
+
+/* ToC */
+.jp .floating-toc {
+  font-size: 0.82rem;
+  line-height: 1.38;
+}
+
+.jp .floating-toc .katex {
+  font-size: inherit !important;
+}
+
+/* KaTeX general */
+.jp .katex {
+  font-family: "Shippori Mincho B1", serif !important;
 }
 
 /* ============================================================

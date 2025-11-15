@@ -5,33 +5,5 @@
   </div>
 </footer>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const tocLinks = document.querySelectorAll(".floating-toc a");
-    const headers = [...document.querySelectorAll("h1, h2, h3, h4")];
-
-    if (tocLinks.length === 0 || headers.length === 0) return;
-
-    const updateActive = () => {
-      const offset = window.scrollY + 120;
-      let current = headers[0];
-
-      for (const h of headers) {
-        if (h.offsetTop <= offset) current = h;
-      }
-
-      tocLinks.forEach((a) => a.classList.remove("active"));
-
-      const id = current.getAttribute("id");
-      if (!id) return;
-
-      const link = document.querySelector(
-        '.floating-toc a[href="#' + id + '"]',
-      );
-      if (link) link.classList.add("active");
-    };
-
-    updateActive();
-    window.addEventListener("scroll", updateActive);
-  });
-</script>
+<!-- TOC active-link logic -->
+<script src="{{ "js/toc-active.js" | relURL }}"></script>
