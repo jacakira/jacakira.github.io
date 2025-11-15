@@ -25,6 +25,7 @@
 
   <body>
     <div class="site-wrapper">
+
       {{ partial "header.html" . }}
 
       <main class="site-main">
@@ -36,6 +37,78 @@
       {{ partial "footer.html" . }}
     </div>
 
-     <script src="{{ "js/toc-active.js" | relURL }}"></script>
+    <!-- ===================================================================
+         PERFECT AUTO–DARK-MODE + USER OVERRIDE + ANIMATION
+       =================================================================== -->
+    <script>
+      (function () {
+        const root = document.documentElement;
+
+        // ---- System preference query ----
+        const media = window.matchMedia("(prefers-color-scheme: dark)");
+
+        // ---- User override (per tab) ----
+        let override = sessionStorage.getItem("themeOverride"); 
+        // values: "dark" | "light" | null
+
+        // ---- Determine active mode ----
+        function computeDark() {
+          if (override === "dark") return true;
+          if (override === "light") return false;
+          return media.matches;       // auto follows system
+        }
+
+        // ---- Apply active mode ----
+        function applyMode() {
+          const dark = computeDark();
+          root.classList.toggle("dark-mode", dark);
+
+          // update button text if available
+          const btn = document.getElementById("theme-toggle");
+          if (btn) {
+            btn.textContent = dark
+              ? "switch to light mode"
+              : "switch to dark mode";
+          }
+        }
+
+        // ---- Run once BEFORE paint ----
+        applyMode();
+
+        // ---- React to OS theme switches ----
+        function onSystemChange() {
+          if (override == null) {
+            applyMode();
+          }
+        }
+
+        if (media.addEventListener) {
+          media.addEventListener("change", onSystemChange);
+        } else if (media.addListener) {
+          media.addListener(onSystemChange); // Safari fallback
+        }
+
+        // ---- Setup toggle button after DOM ----
+        document.addEventListener("DOMContentLoaded", () => {
+          const btn = document.getElementById("theme-toggle");
+          if (!btn) return;
+
+          btn.addEventListener("click", () => {
+            // manual override toggles dark-mode
+            const dark = computeDark();
+            const next = !dark;
+
+            override = next ? "dark" : "light";
+            sessionStorage.setItem("themeOverride", override);
+
+            applyMode();   // triggers CSS animation
+          });
+
+          applyMode();     // update button text
+        });
+      })();
+    </script>
+
+    <script src="{{ "js/toc-active.js" | relURL }}"></script>
   </body>
 </html>
