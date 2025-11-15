@@ -155,3 +155,31 @@ blockquote p {
 blockquote em {
   font-style: italic;
 }
+
+/* ============================================================
+   SAFARI iOS — PREVENT AUTO-ZOOM IN CODE BLOCKS
+   ============================================================ */
+
+/* 1) Ensure ALL code elements (inline + block + Chroma) respect text-size */
+pre,
+pre code,
+code,
+.chroma,
+.chroma .ln,
+.chroma .code {
+  -webkit-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
+}
+
+/* 2) Additional guard: ensure Safari doesn’t increase mono fonts on pinch */
+@supports (-webkit-touch-callout: none) {
+  pre,
+  pre code,
+  code,
+  .chroma,
+  .chroma .ln,
+  .chroma .code {
+    font-size: 14px !important; /* matches your intended size */
+    line-height: 1.45 !important;
+  }
+}
