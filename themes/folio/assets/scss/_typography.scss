@@ -175,6 +175,16 @@ a.footnote-backref:hover::after {
   color: $color-text;
 }
 
+.now-playing a.now-playing-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.now-playing a.now-playing-link:hover {
+  text-decoration: underline;
+}
+
 // ---------------------------------------
 // BLOCK CODE WRAPPER — base styling
 // (font-size overridden in utilities for Safari safety)
