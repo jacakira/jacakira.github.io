@@ -1,3 +1,7 @@
+/* ============================================
+   BASIC UTILITIES
+   ============================================ */
+
 hr {
   border: none;
   border-top: 1px solid rgba(0, 0, 0, 0.08);
@@ -12,6 +16,7 @@ strong {
 }
 
 /* Index pages */
+
 .index-year {
   margin-top: 2rem;
 }
@@ -20,28 +25,34 @@ strong {
   font-weight: 500;
   margin-bottom: 0.3rem;
 }
+
 .index-year-rule {
   height: 1px;
   background: rgba(0, 0, 0, 0.08);
   margin-bottom: 0.6rem;
 }
+
 .index-entry {
   display: flex;
   font-size: 0.98rem;
   margin-bottom: 0.15rem;
 }
+
 .index-entry-date {
   width: 4.5rem;
   font-family: $font-header;
   color: $color-muted;
 }
+
 .index-entry-title {
   flex: 1;
   text-align: left;
 }
+
 .index-entry-title a {
   text-decoration: none;
 }
+
 .index-entry-nodate {
   margin-bottom: 0.15rem;
   text-align: left;
@@ -52,11 +63,11 @@ strong {
   margin-bottom: 1.2rem;
 }
 
-/* ============================================================
-   ACADEMIC CODE BLOCKS — minimal, paper-like
-   ============================================================ */
+/* ============================================
+   CODE BLOCKS — CHROMA
+   ============================================ */
 
-/* Fallback <pre> (no chroma) */
+/* Base (fallback <pre>) */
 pre {
   margin: 1.2rem 0;
   padding: 0;
@@ -67,7 +78,7 @@ pre {
 
 pre code {
   font-family: $font-mono;
-  font-size: 0.85rem;
+  font-size: 14px; /* <- absolute = Safari-safe */
   line-height: 1.45;
   background: none;
   padding: 0;
@@ -81,7 +92,7 @@ pre code {
   overflow-x: auto;
 
   font-family: $font-mono;
-  font-size: 0.85rem; /* ← global uniform size */
+  font-size: 14px; /* <- absolute = Safari-safe */
   line-height: 1.45;
 }
 
@@ -96,14 +107,13 @@ pre code {
   vertical-align: top;
 }
 
-/* Line numbers + code should match exactly */
+/* Perfect match between line numbers + code */
 .chroma .ln,
 .chroma .code {
-  font-size: inherit; /* ← SAME size */
-  font-family: $font-mono;
+  font-size: inherit; /* both = 14px */
+  font-family: inherit;
 }
 
-/* Chroma pre wrapper */
 .chroma pre {
   padding: 0;
   margin: 0;
@@ -115,7 +125,6 @@ pre code {
 }
 
 /* Syntax colours */
-
 .chroma .c,
 .chroma .c1,
 .chroma .cm {
@@ -126,18 +135,28 @@ pre code {
 .chroma .k {
   color: $color-link;
 }
-
 .chroma .s {
   color: #8b4c00;
 }
-
 .chroma .m {
   color: #005555;
 }
 
-/* ============================================================
+/* ============================================
+   SAFARI MOBILE FIX (critical)
+   ============================================ */
+
+.chroma,
+.chroma .ln,
+.chroma .code,
+pre code {
+  -webkit-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
+}
+
+/* ============================================
    BLOCKQUOTES
-   ============================================================ */
+   ============================================ */
 
 blockquote {
   font-family: $font-header;
@@ -152,6 +171,7 @@ blockquote {
 blockquote p {
   margin: 0;
 }
+
 blockquote em {
   font-style: italic;
 }

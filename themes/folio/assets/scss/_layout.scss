@@ -122,6 +122,10 @@
 
   color: $color-link;
   z-index: 200;
+
+  /* subtle fade */
+  opacity: 1;
+  transition: opacity 0.35s ease-out;
 }
 
 /* Title */
@@ -169,10 +173,11 @@
   color: $color-link;
 }
 
-/* Hide ToC below 1100px width */
+/* Fade out (but keep layout stable) below 1400px */
 @media (max-width: 1400px) {
   .floating-toc {
-    display: none !important;
+    opacity: 0;
+    pointer-events: none;
   }
 }
 
