@@ -72,7 +72,7 @@ Folio is a beautiful, extensible and typographically sound hugo theme[^1] for bl
 Over the summer, the Royal Albert Hall hosts BBC Proms (see [Figure 1](#fig:test-image)).
 
 <figure id="fig:test-image" style="text-align:center;">
-  <img src="/images/DSCF0770.jpg" alt="Test image" style="max-width:100%;">
+  <img src="/images/DSCF0770.JPG" alt="Test image" style="max-width:100%;">
   <figcaption><strong>Figure 1.</strong>The Royal Albert Hall</figcaption>
 </figure>
 
