@@ -1,6 +1,6 @@
-// ---------------------------------------
-// TYPOGRAPHY SYSTEM
-// ---------------------------------------
+// ==========================================================
+// TYPOGRAPHY
+// ==========================================================
 
 html {
   font-size: $base-font-size;
@@ -10,15 +10,19 @@ body {
   font-family: $font-body;
   font-size: 1rem;
   line-height: 1.6;
-  color: $color-text;
   background: $color-bg;
+  color: $color-text;
   margin: 0;
   padding: 0;
+
+  transition:
+    background-color 0.28s ease-in-out,
+    color 0.28s ease-in-out;
 }
 
-// ---------------------------------------
+// ----------------------------------------------------------
 // HEADINGS
-// ---------------------------------------
+// ----------------------------------------------------------
 
 h1,
 h2,
@@ -29,6 +33,9 @@ h5 {
   font-weight: 600;
   margin-top: 2rem;
   margin-bottom: 1rem;
+  color: $color-text;
+
+  transition: color 0.28s ease-in-out;
 }
 
 h1 {
@@ -52,9 +59,9 @@ h4 {
   line-height: 1.4;
 }
 
-// ---------------------------------------
-// PARAGRAPHS / LINKS
-// ---------------------------------------
+// ----------------------------------------------------------
+// PARAGRAPH / LINK
+// ----------------------------------------------------------
 
 p {
   margin: 1rem 0;
@@ -63,15 +70,15 @@ p {
 a {
   color: $color-link;
   text-decoration: none;
-
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
-// ---------------------------------------
-// INLINE CODE — uses rem (good for text flow)
-// ---------------------------------------
+a:hover {
+  text-decoration: underline;
+}
+
+// ----------------------------------------------------------
+// INLINE CODE
+// ----------------------------------------------------------
 
 code {
   font-family: $font-mono;
@@ -79,26 +86,31 @@ code {
   background: $color-code-bg;
   padding: 0.15rem 0.3rem;
   border-radius: 3px;
+
+  transition:
+    background-color 0.28s ease-in-out,
+    color 0.28s ease-in-out;
 }
 
-// ---------------------------------------
-// KATEX MATH
-// ---------------------------------------
+// ----------------------------------------------------------
+// KATEX
+// ----------------------------------------------------------
 
 .katex {
   font-size: 0.9rem !important;
+  color: $color-text;
 }
 
 .katex-display {
-  font-size: 0.9rem;
   margin: 1.2rem 0;
   text-align: center;
 }
 
-// ---------------------------------------
-// FOOTNOTES
-// ---------------------------------------
+// ----------------------------------------------------------
+// FOOTNOTES — “academic” styling with [return]
+// ----------------------------------------------------------
 
+// Remove default full-width HR
 hr.footnotes-sep,
 hr.footnotes {
   display: none !important;
@@ -110,6 +122,7 @@ hr.footnotes {
   position: relative;
 }
 
+/* Short academic divider */
 .footnotes::before {
   content: "";
   position: absolute;
@@ -117,7 +130,7 @@ hr.footnotes {
   left: 0;
   width: 35%;
   height: 1px;
-  background: rgba(0, 0, 0, 0.08);
+  background: $color-rule;
 }
 
 .footnotes ol {
@@ -136,8 +149,10 @@ hr.footnotes {
   display: inline;
 }
 
+/* Inline superscript numbers in the text */
 sup[id^="fnref"] {
   font-size: 0.7rem;
+  font-family: $font-body;
 }
 
 sup[id^="fnref"] a {
@@ -145,21 +160,26 @@ sup[id^="fnref"] a {
   text-decoration: none;
 }
 
+/* Link from footnote text back to the reference (Hugo’s default) */
 .footnotes a[href^="#fnref"] {
   color: $color-muted;
   text-decoration: none;
   margin-left: 0.25rem;
   font-size: 0.8rem;
+  font-family: $font-body;
 }
 
 .footnotes a[href^="#fnref"]:hover {
   color: $color-text;
 }
 
+/* Hide Hugo’s ugly ↩ symbol and replace with [return] */
 a.footnote-backref {
-  font-size: 0;
+  font-size: 0; /* hide original symbol */
   width: 0;
   overflow: visible;
+  display: inline-block;
+  vertical-align: baseline;
 }
 
 a.footnote-backref::after {
@@ -177,76 +197,29 @@ a.footnote-backref:hover::after {
 
 /* Reduce KaTeX size inside footnotes */
 .footnotes .katex {
-  font-size: 0.75rem !important; // adjust to taste
+  font-size: 0.75rem !important;
 }
 
 .footnotes .katex-display {
-  font-size: 0.75rem !important; // same scaling for display math
-  margin: 0.6rem 0; // tighter spacing for footnotes
-}
-
-.now-playing a.now-playing-link {
-  color: $color-muted;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.now-playing a.now-playing-link:hover {
-  text-decoration: underline;
-  color: $color-muted;
-}
-
-// ---------------------------------------
-// BLOCK CODE WRAPPER — base styling
-// (font-size overridden in utilities for Safari safety)
-// ---------------------------------------
-
-.chroma {
-  background: $color-code-bg;
-  border-radius: 3px;
-  padding: 0.4rem 0.55rem;
+  font-size: 0.75rem !important;
   margin: 0.6rem 0;
-  overflow-x: auto;
-  font-family: $font-mono;
 }
 
-.chroma pre {
-  background: transparent;
-  margin: 0;
-  padding: 0;
+/* Final safety: no stray HR inside block */
+.footnotes > hr {
+  display: none !important;
 }
 
-/* Fallback <pre> */
-pre {
-  font-family: $font-mono;
-  background: $color-code-bg;
-  border-radius: 3px;
-  padding: 0.4rem 0.55rem;
-  margin: 0.6rem 0;
-  overflow-x: auto;
-}
+// ----------------------------------------------------------
+// JAPANESE TYPOGRAPHY
+// ----------------------------------------------------------
 
-pre code {
-  background: none;
-  padding: 0;
-}
-
-/* ============================================================
-   JAPANESE TYPOGRAPHY – HIGH PERFORMANCE VERSION
-   ============================================================ */
-
-/* Global JP font trigger */
 .jp {
-  font-family: "Shippori Mincho B1", serif !important;
-}
-
-/* Body text */
-.jp {
+  font-family: $font-jp !important;
   font-size: 1rem;
   line-height: 1.65;
 }
 
-/* Headings */
 .jp h1 {
   font-size: 1.9rem;
 }
@@ -260,42 +233,10 @@ pre code {
   font-size: 1.15rem;
 }
 
-/* Footnotes */
 .jp .footnotes {
   font-size: 0.78rem;
-  line-height: 1.45;
 }
 
-.jp .footnotes .katex {
-  font-size: 0.72rem !important;
-}
-
-/* ToC */
 .jp .floating-toc {
   font-size: 0.82rem;
-  line-height: 1.38;
-}
-
-.jp .floating-toc .katex {
-  font-size: inherit !important;
-}
-
-/* KaTeX general */
-.jp .katex {
-  font-family: "Shippori Mincho B1", serif !important;
-}
-
-/* ============================================================
-   FINAL ENFORCED FOOTNOTE HR SUPPRESSION
-   (prevents Safari reflow during TOC fade-out)
-   ============================================================ */
-
-hr.footnotes-sep,
-hr.footnotes,
-.footnotes > hr {
-  display: none !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
 }

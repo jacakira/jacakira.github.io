@@ -1,9 +1,7 @@
 <footer class="site-footer">
   <div class="site-footer-inner">
     {{ partial "now-playing.html" . }}
+
     <div class="footer-meta">© {{ now.Format "2006" }} {{ .Site.Title }}</div>
   </div>
 </footer>
-
-<!-- TOC active-link logic -->
-<script src="{{ "js/toc-active.js" | relURL }}"></script>

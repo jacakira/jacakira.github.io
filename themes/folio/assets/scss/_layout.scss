@@ -6,6 +6,12 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: $color-bg;
+  color: $color-text;
+
+  transition:
+    background-color 0.28s ease-in-out,
+    color 0.28s ease-in-out;
 }
 
 // ==========================================================
@@ -43,7 +49,6 @@
   padding: 0 1rem 2rem 1rem;
 }
 
-/* Centred column. Width is controlled ONLY by $max-width. */
 .content {
   width: 100%;
   max-width: $max-width;
@@ -59,8 +64,12 @@
   font-size: 0.7rem;
   color: $color-muted;
   padding: 1.5rem 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 1px solid $color-rule;
   text-align: center;
+
+  transition:
+    border-color 0.28s ease-in-out,
+    color 0.28s ease-in-out;
 }
 
 .site-footer-inner {
@@ -72,8 +81,33 @@
   gap: 0.4rem;
 }
 
+/* Footer theme toggle — indistinguishable from surrounding text */
+.theme-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: 0.35rem;
+
+  font: inherit; // inherit 0.7rem + Garamond from footer
+  color: inherit; // inherit $color-muted
+  cursor: pointer;
+  text-decoration: none;
+
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.theme-toggle:hover {
+  text-decoration: underline;
+}
+
+.footer-separator {
+  margin: 0 0.35rem;
+  color: $color-muted;
+}
+
 // ==========================================================
-// NOW PLAYING
+// NOW PLAYING (footer)
 // ==========================================================
 
 .now-playing {
@@ -96,18 +130,16 @@
   html {
     font-size: $base-font-size * 1.1;
   }
-  /* NOTE: no .content override here.
-     The width is always controlled by $max-width. */
 }
 
 // ==========================================================
-// FLOATING TABLE OF CONTENTS (right)
+// FLOATING TABLE OF CONTENTS
 // ==========================================================
 
 .floating-toc {
   position: fixed;
   top: 6rem;
-  right: 3rem; /* right gutter */
+  right: 3rem;
   width: 210px;
 
   max-height: 75vh;
@@ -118,62 +150,52 @@
   font-family: $font-body;
 
   padding-left: 1rem;
-  border-left: 1px solid rgba(0, 0, 0, 0.15);
+  border-left: 1px solid $color-rule;
 
   color: $color-link;
   z-index: 200;
 
-  /* subtle fade */
   opacity: 1;
   transition: opacity 0.35s ease-out;
 }
 
-/* Title */
 .toc-title {
   margin-top: 0;
   margin-bottom: 0.4rem;
   font-size: 0.78rem;
-  // remove caps by commenting out this line:
-  // text-transform: uppercase;
   letter-spacing: 0.05em;
   color: $color-muted;
 }
 
-/* Remove bullets */
 .floating-toc ul {
   list-style: none;
   padding-left: 0;
   margin: 0;
 }
 
-/* normal entries */
 .floating-toc li {
   margin: 0.12rem 0;
 }
 
-/* nested indent */
 .floating-toc ul ul {
   margin-left: 0.8rem;
 }
 
-/* links */
 .floating-toc a {
   text-decoration: none;
   color: $color-link;
 }
 
-/* Hover */
 .floating-toc a:hover {
   text-decoration: underline;
 }
 
-/* Active (current section) */
 .floating-toc a.active {
   font-weight: 600;
   color: $color-link;
 }
 
-/* Fade out (but keep layout stable) below 1400px */
+// Fade out below 1400px
 @media (max-width: 1400px) {
   .floating-toc {
     opacity: 0;
@@ -182,13 +204,5 @@
 }
 
 .floating-toc .katex {
-  font-size: 0.75rem !important; // or whatever size
-}
-
-.floating-toc .katex .katex-html {
-  font-size: inherit !important;
-}
-
-.floating-toc .katex .katex-mathml {
-  font-size: inherit !important;
+  font-size: 0.75rem !important;
 }
