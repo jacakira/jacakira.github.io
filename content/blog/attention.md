@@ -22,7 +22,8 @@ In machine translation and sentence generation tasks, our aim is to model sequen
 $$
 (x_1, \dots, x_n) \mapsto (y_1, \dots, y_m),
 $$
-where $x_i \in \mathcal{V}_{\mathrm{src}}$ and $y_j \in \mathcal{V}_{\mathm{tgt}$ are tokens (typically words, subwords, characters etc.), where $\mathcal{V}_{\mathrm{src}}$ and $\mathcal{V}_{\mathrm{tgt}}$ are the source and target vocabularies respectively.
+
+where {{< math display="false" >}}x_i \in \mathcal{V}_{\mathrm{src}}{{< /math >}} and {{< math display="false" >}}y_j \in \mathcal{V}_{\mathrm{tgt}}{{< /math >}} are tokens (typically words, subwords, characters etc.), where {{< math display="false" >}}\mathcal{V}_{\mathrm{src}}{{< /math >}} and {{< math display="false" >}}\mathcal{V}_{\mathrm{tgt}}{{< /math >}} are the source and target vocabularies respectively.
 
 A neural sequence model will give us conditional distributions such as
 
