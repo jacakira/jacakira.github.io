@@ -5,6 +5,7 @@ tags: ["ml", "ml.attention", "ml.transformer"]
 categories: ["mathematics"]
 draft: false
 showTOC: true
+description: "Transformers are the powerful architecture behind LLMs. We take a deep-dive into how they work."
 ---
 
 ## Introduction
