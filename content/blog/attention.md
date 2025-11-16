@@ -57,7 +57,6 @@ $$
 
 Crucially, we have sequential dependence. This brings with it certain issues
 
-[todo]
 1. No parallelism across time: RNN's compute $h_t$ only after $h_{t-1}$.
 2. Information bottleneck: all information must flow through the recurrent state vector.
 3. Gradient issues: the Jacobian $\partial h_t/ \partial h_{t-1}$ is multiplied repeatedly over $t$ which can lead to vanishing and exploding gradients.
