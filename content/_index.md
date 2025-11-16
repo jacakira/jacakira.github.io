@@ -4,4 +4,7 @@ title: "Home"
 
 # Home
 
-I am an undergraduate mathematics student at [Imperial College London](https://www.imperial.ac.uk/mathematics/) interested in pure mathematics and machine learning. Here, you will find expository notes on Mathematics, Machine Learning and more.
+Hi! I'm [Akira Tanase](/about). 
+
+I am an undergraduate mathematics student at [Imperial College London](https://www.imperial.ac.uk/mathematics/). I write a [blog](blog/), mainly about math and ML, but sometimes venture into other topics too.
+
